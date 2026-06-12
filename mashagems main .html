@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mashagems — Lab Grown Sapphires · Galle, Sri Lanka</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #03080F;
+  --surface: #071220;
+  --card: #0A1828;
+  --blue-deep: #0D2545;
+  --blue-mid: #1A4A8A;
+  --blue-bright: #2D7DD2;
+  --blue-glow: #4FA3F7;
+  --cyan: #00C9E0;
+  --white: #EEF4FF;
+  --muted: #6B8AAD;
+  --border: rgba(45,125,210,0.15);
+  --border-bright: rgba(79,163,247,0.4);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ANIMATED BACKGROUND */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(45,125,210,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,125,210,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 5rem;
+  background: rgba(3,8,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.3s;
+}
+nav.scrolled { border-bottom-color: var(--border-bright); }
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+.nav-logo span {
+  color: var(--blue-glow);
+}
+.nav-tag {
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-top: 0.1rem;
+}
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--blue-glow); }
+
+.nav-cta {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--bg);
+  background: var(--blue-glow);
+  padding: 0.65rem 1.6rem;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s;
+  text-transform: uppercase;
+}
+.nav-cta:hover { background: var(--cyan); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 5rem;
+}
+
+/* Animated orb */
+.hero-orb {
+  position: absolute;
+  right: -5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 35% 35%,
+    rgba(79,163,247,0.25) 0%,
+    rgba(45,125,210,0.15) 30%,
+    rgba(13,37,69,0.1) 60%,
+    transparent 80%
+  );
+  animation: orbPulse 6s ease-in-out infinite;
+}
+@keyframes orbPulse {
+  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-52%) scale(1.05); opacity: 1; }
+}
+
+.hero-orb::before {
+  content: '';
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  border: 1px solid rgba(79,163,247,0.2);
+  animation: ringExpand 4s ease-in-out infinite;
+}
+.hero-orb::after {
+  content: '';
+  position: absolute;
+  inset: 25%;
+  border-radius: 50%;
+  border: 1px solid rgba(0,201,224,0.3);
+  animation: ringExpand 4s ease-in-out infinite 1s;
+}
+@keyframes ringExpand {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+/* Sapphire SVG crystal */
+.hero-crystal {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  height: 320px;
+  animation: crystalFloat 8s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(79,163,247,0.4));
+}
+@keyframes crystalFloat {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  33% { transform: translateY(-53%) rotate(2deg); }
+  66% { transform: translateY(-47%) rotate(-1deg); }
+}
+
+.hero-left {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-bright);
+  border-radius: 100px;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue-glow);
+  margin-bottom: 2.5rem;
+  background: rgba(79,163,247,0.05);
+  animation: fadeUp 1s 0.2s both;
+}
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 1s 0.35s both;
+}
+.hero-title .accent {
+  display: block;
+  font-style: italic;
+  background: linear-gradient(135deg, var(--blue-glow), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 480px;
+  margin-bottom: 3rem;
+  animation: fadeUp 1s 0.5s both;
+}
+
+.hero-pills {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  animation: fadeUp 1s 0.65s both;
+}
+.pill {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 100px;
+}
+.pill.lit { border-color: rgba(79,163,247,0.3); color: var(--blue-glow); background: rgba(79,163,247,0.05); }
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  animation: fadeUp 1s 0.8s both;
+}
+
+.btn-primary {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: linear-gradient(135deg, var(--blue-glow), var(--cyan));
+  padding: 0.9rem 2.2rem;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s;
+  box-shadow: 0 0 30px rgba(79,163,247,0.2);
+}
+.btn-primary:hover { box-shadow: 0 0 40px rgba(79,163,247,0.4); transform: translateY(-2px); }
+
+.btn-outline {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-glow);
+  border: 1px solid var(--border-bright);
+  padding: 0.9rem 2.2rem;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.btn-outline:hover { background: rgba(79,163,247,0.08); }
+
+.hero-rating {
+  position: absolute;
+  bottom: 3rem;
+  left: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  animation: fadeUp 1s 1s both;
+}
+.stars-blue { color: var(--blue-glow); font-size: 0.9rem; }
+.rating-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SECTION BASE */
+section { padding: 8rem 5rem; position: relative; z-index: 1; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--blue-glow);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-eyebrow::after { content: ''; flex: 0 0 30px; height: 1px; background: var(--blue-glow); opacity: 0.5; }
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.15;
+  color: var(--white);
+}
+.section-title em {
+  font-style: italic;
+  color: var(--blue-glow);
+}
+
+/* WHY LAB GROWN */
+.why-section { background: var(--surface); }
+.why-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--blue-mid), transparent);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.why-points { display: flex; flex-direction: column; gap: 2rem; margin-top: 3rem; }
+
+.why-point {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: rgba(7,18,32,0.5);
+  transition: border-color 0.3s, background 0.3s;
+}
+.why-point:hover { border-color: var(--border-bright); background: rgba(45,125,210,0.05); }
+
+.why-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--blue-mid);
+  line-height: 1;
+}
+
+.why-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.why-text { font-size: 0.8rem; line-height: 1.7; color: var(--muted); }
+
+/* Comparison chart */
+.compare-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.compare-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.compare-header div {
+  padding: 1rem 1.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-right: 1px solid var(--border);
+}
+.compare-header div:last-child { border-right: none; }
+.compare-header .highlight { color: var(--blue-glow); background: rgba(79,163,247,0.06); }
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid rgba(45,125,210,0.08);
+  transition: background 0.2s;
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-row:hover { background: rgba(45,125,210,0.04); }
+.compare-row div {
+  padding: 1rem 1.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  border-right: 1px solid rgba(45,125,210,0.08);
+  line-height: 1.5;
+}
+.compare-row div:last-child { border-right: none; }
+.compare-row .feature { color: var(--white); font-size: 0.75rem; }
+.compare-row .lab { color: var(--blue-glow); background: rgba(79,163,247,0.04); }
+.compare-row .check { color: var(--cyan); }
+.compare-row .cross { color: #E05555; }
+
+/* PRODUCTS */
+.products-section { background: var(--bg); }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+  margin-top: 4rem;
+  background: var(--border);
+}
+
+.product-card {
+  background: var(--bg);
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--blue-bright), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.product-card:hover { background: var(--surface); }
+.product-card:hover::before { opacity: 1; }
+
+.product-crystal {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 2rem;
+}
+
+.product-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.product-color {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-glow);
+  margin-bottom: 1rem;
+}
+.product-desc { font-size: 0.8rem; line-height: 1.7; color: var(--muted); }
+
+/* PROCESS */
+.process-section {
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+.process-section::after {
+  content: '';
+  position: absolute;
+  bottom: -200px; right: -200px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(79,163,247,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.process-timeline {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+.process-timeline::before {
+  content: '';
+  position: absolute;
+  left: 1.75rem;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--blue-bright), rgba(45,125,210,0.1));
+}
+
+.timeline-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 2rem;
+  padding-bottom: 3.5rem;
+  position: relative;
+}
+.timeline-step:last-child { padding-bottom: 0; }
+
+.step-circle {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--blue-mid);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--blue-glow);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  transition: border-color 0.3s, background 0.3s;
+}
+.timeline-step:hover .step-circle {
+  border-color: var(--blue-glow);
+  background: rgba(79,163,247,0.1);
+}
+
+.step-content { padding-top: 0.8rem; }
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.step-text { font-size: 0.82rem; line-height: 1.75; color: var(--muted); max-width: 500px; }
+
+/* REVIEWS */
+.reviews-section { background: var(--bg); }
+
+.reviews-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+.rating-display { text-align: right; }
+.rating-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 4.5rem;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--blue-glow), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.rating-stars { color: var(--blue-glow); font-size: 1.1rem; margin: 0.4rem 0; }
+.rating-sub { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.review-card {
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  position: relative;
+  transition: border-color 0.3s;
+}
+.review-card:hover { border-color: var(--border-bright); }
+
+.review-stars { color: var(--blue-glow); font-size: 0.8rem; margin-bottom: 1.25rem; }
+.review-text {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: rgba(238,244,255,0.65);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+.review-meta { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-glow); }
+
+/* CONTACT */
+.contact-section {
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: -100px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(79,163,247,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+  margin-top: 4rem;
+}
+
+.info-block { margin-bottom: 2.5rem; }
+.info-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--blue-glow);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.info-value {
+  font-size: 1rem;
+  color: var(--white);
+  line-height: 1.6;
+}
+.info-value a { color: var(--white); text-decoration: none; }
+.info-value a:hover { color: var(--blue-glow); }
+
+.hours-row { display: flex; justify-content: space-between; gap: 2rem; font-size: 0.8rem; margin-bottom: 0.3rem; }
+.hours-row span:first-child { color: var(--muted); }
+.hours-row span:last-child { color: var(--white); }
+
+.contact-buttons { display: flex; flex-direction: column; gap: 0.75rem; }
+.cta-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 2rem;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+.cta-btn.primary {
+  background: linear-gradient(135deg, var(--blue-bright), var(--blue-glow));
+  color: var(--white);
+  box-shadow: 0 4px 20px rgba(45,125,210,0.25);
+}
+.cta-btn.primary:hover { box-shadow: 0 4px 30px rgba(79,163,247,0.4); transform: translateY(-2px); }
+.cta-btn.secondary {
+  border: 1px solid var(--border-bright);
+  color: var(--blue-glow);
+}
+.cta-btn.secondary:hover { background: rgba(79,163,247,0.06); }
+
+.cta-icon { font-size: 1rem; }
+
+/* FOOTER */
+footer {
+  background: var(--bg);
+  padding: 4rem 5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-brand {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--white);
+}
+.footer-brand span { color: var(--blue-glow); }
+.footer-tag { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.footer-links a:hover { color: var(--blue-glow); }
+
+.footer-copy { font-size: 0.6rem; color: rgba(107,138,173,0.4); }
+
+/* ── STORE ── */
+.filter-btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--muted);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover { border-color: var(--border-bright); color: var(--blue-glow); }
+.filter-btn.active { border-color: var(--blue-glow); color: var(--blue-glow); background: rgba(79,163,247,0.08); }
+
+.shop-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.25s, transform 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+.shop-card:hover { border-color: var(--border-bright); transform: translateY(-4px); }
+
+.shop-card-gem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.shop-card-gem::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.shop-card:hover .shop-card-gem::before { opacity: 1; }
+
+.shop-card-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
+.shop-card-color { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-glow); }
+.shop-card-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--white); line-height: 1.3; }
+.shop-card-specs { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+.shop-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border); }
+.shop-card-price { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1.05rem; color: var(--white); }
+.shop-card-price span { font-size: 0.7rem; font-weight: 400; color: var(--muted); }
+.add-to-cart {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  background: rgba(79,163,247,0.1);
+  border: 1px solid var(--border-bright);
+  color: var(--blue-glow);
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.add-to-cart:hover { background: var(--blue-glow); color: var(--bg); }
+.add-to-cart.added { background: var(--cyan); color: var(--bg); border-color: var(--cyan); }
+
+.shop-badge {
+  position: absolute;
+  top: 0.75rem; left: 0.75rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  font-weight: 500;
+}
+.badge-new { background: rgba(0,201,224,0.15); color: var(--cyan); border: 1px solid rgba(0,201,224,0.3); }
+.badge-popular { background: rgba(79,163,247,0.15); color: var(--blue-glow); border: 1px solid rgba(79,163,247,0.3); }
+.badge-rare { background: rgba(247,160,79,0.15); color: #F7A04F; border: 1px solid rgba(247,160,79,0.3); }
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.cart-item:last-child { border-bottom: none; }
+.cart-item-gem { width: 48px; height: 48px; border-radius: 3px; background: var(--card); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); flex-shrink: 0; }
+.cart-item-name { font-size: 0.8rem; font-weight: 500; color: var(--white); margin-bottom: 0.2rem; }
+.cart-item-spec { font-size: 0.65rem; color: var(--muted); }
+.cart-item-price { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.9rem; color: var(--white); white-space: nowrap; }
+.qty-control { display: flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem; }
+.qty-btn { background: var(--card); border: 1px solid var(--border); color: var(--muted); width: 22px; height: 22px; border-radius: 2px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.qty-btn:hover { border-color: var(--border-bright); color: var(--white); }
+.qty-val { font-size: 0.8rem; color: var(--white); min-width: 20px; text-align: center; }
+
+/* Modal */
+.modal-gem-view { display: flex; align-items: center; justify-content: center; padding: 3rem; background: var(--card); border-bottom: 1px solid var(--border); }
+.modal-body { padding: 2.5rem; }
+.modal-color-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blue-glow); margin-bottom: 0.5rem; }
+.modal-name { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--white); margin-bottom: 1rem; }
+.modal-price { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 2rem; color: var(--white); margin-bottom: 1.5rem; }
+.modal-price small { font-size: 0.9rem; font-weight: 300; color: var(--muted); }
+.modal-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 2rem; }
+.spec-chip { padding: 0.75rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 3px; }
+.spec-label { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; display: block; }
+.spec-val { font-size: 0.85rem; color: var(--white); }
+.modal-desc { font-size: 0.85rem; line-height: 1.8; color: var(--muted); margin-bottom: 2rem; }
+.modal-actions { display: flex; gap: 1rem; }
+.modal-add { flex: 1; padding: 1rem; background: linear-gradient(135deg, var(--blue-bright), var(--blue-glow)); color: var(--white); border: none; border-radius: 3px; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+.modal-add:hover { box-shadow: 0 4px 30px rgba(79,163,247,0.4); }
+.modal-wa { padding: 1rem 1.5rem; border: 1px solid var(--border-bright); color: var(--blue-glow); background: none; border-radius: 3px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+.modal-wa:hover { background: rgba(79,163,247,0.08); }
+.modal-close { position: absolute; top: 1.25rem; right: 1.25rem; background: rgba(3,8,15,0.8); border: 1px solid var(--border); color: var(--muted); width: 34px; height: 34px; border-radius: 2px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.modal-close:hover { border-color: var(--border-bright); color: var(--white); }
+
+@media (max-width: 960px) {
+  #store { padding: 5rem 2rem !important; }
+  #product-grid { grid-template-columns: 1fr 1fr !important; }
+  #cart-drawer { width: 100vw; }
+}
+@media (max-width: 600px) {
+  #product-grid { grid-template-columns: 1fr !important; }
+}
+
+  nav { padding: 1.2rem 2rem; }
+  .nav-links { display: none; }
+  section { padding: 5rem 2rem; }
+  .hero { padding: 6rem 2rem 4rem; flex-direction: column; justify-content: center; }
+  .hero-crystal, .hero-orb { display: none; }
+  .hero-rating { left: 2rem; }
+  .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .products-grid, .reviews-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div>
+    <div class="nav-logo">Masha<span>gems</span></div>
+    <div class="nav-tag">Lab Grown Sapphires · Galle, Sri Lanka</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#why">Why Lab Grown</a></li>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#store">Store</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:1rem;align-items:center;">
+    <button id="cart-btn" onclick="toggleCart()" style="background:none;border:1px solid var(--border-bright);color:var(--blue-glow);padding:0.55rem 1rem;border-radius:2px;cursor:pointer;font-family:inherit;font-size:0.75rem;display:flex;align-items:center;gap:0.5rem;transition:all 0.3s;" onmouseover="this.style.background='rgba(79,163,247,0.08)'" onmouseout="this.style.background='none'">
+      🛒 <span id="cart-count-badge" style="display:none;background:var(--cyan);color:var(--bg);border-radius:100px;font-size:0.6rem;font-weight:700;padding:0.1rem 0.4rem;">0</span>
+    </button>
+    <a href="https://wa.me/94777903698" target="_blank" class="nav-cta">WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <svg class="hero-crystal" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="cr1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#4FA3F7;stop-opacity:0.9"/>
+        <stop offset="100%" style="stop-color:#1A4A8A;stop-opacity:1"/>
+      </linearGradient>
+      <linearGradient id="cr2" x1="100%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#00C9E0;stop-opacity:0.8"/>
+        <stop offset="100%" style="stop-color:#2D7DD2;stop-opacity:0.9"/>
+      </linearGradient>
+      <linearGradient id="cr3" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#0D2545;stop-opacity:1"/>
+        <stop offset="100%" style="stop-color:#1A4A8A;stop-opacity:0.8"/>
+      </linearGradient>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <!-- Main gem body -->
+    <polygon points="150,20 260,90 260,210 150,280 40,210 40,90" fill="url(#cr3)" stroke="rgba(79,163,247,0.3)" stroke-width="1" filter="url(#glow)"/>
+    <!-- Top facets -->
+    <polygon points="150,20 260,90 150,120" fill="url(#cr1)" opacity="0.9"/>
+    <polygon points="150,20 40,90 150,120" fill="url(#cr2)" opacity="0.7"/>
+    <!-- Middle band -->
+    <polygon points="40,90 150,120 260,90" fill="rgba(79,163,247,0.1)"/>
+    <!-- Bottom facets -->
+    <polygon points="150,120 260,90 260,210 150,180" fill="rgba(45,125,210,0.5)"/>
+    <polygon points="150,120 40,90 40,210 150,180" fill="rgba(26,58,107,0.7)"/>
+    <polygon points="150,180 260,210 150,280" fill="rgba(79,163,247,0.4)"/>
+    <polygon points="150,180 40,210 150,280" fill="rgba(13,37,69,0.8)"/>
+    <!-- Shine lines -->
+    <line x1="150" y1="20" x2="150" y2="120" stroke="rgba(0,201,224,0.3)" stroke-width="0.5"/>
+    <line x1="40" y1="90" x2="260" y2="90" stroke="rgba(79,163,247,0.2)" stroke-width="0.5"/>
+    <line x1="40" y1="210" x2="260" y2="210" stroke="rgba(79,163,247,0.15)" stroke-width="0.5"/>
+    <!-- Highlight -->
+    <ellipse cx="120" cy="80" rx="20" ry="12" fill="rgba(255,255,255,0.15)" transform="rotate(-20,120,80)"/>
+  </svg>
+
+  <div class="hero-left">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Ethically Created · Scientifically Certified
+    </div>
+
+    <h1 class="hero-title">
+      Lab Grown<br>
+      <span class="accent">Sapphires</span>
+    </h1>
+
+    <p class="hero-sub">Identical in every way to mined sapphires — the same crystal structure, the same brilliance, the same chemical composition. Created with science. Delivered from Galle.</p>
+
+    <div class="hero-pills">
+      <span class="pill lit">Certified</span>
+      <span class="pill lit">Conflict Free</span>
+      <span class="pill">Custom Settings</span>
+      <span class="pill">All Colours</span>
+      <span class="pill">Hotel Delivery</span>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#collection" class="btn-primary">View Collection</a>
+      <a href="#why" class="btn-outline">Why Lab Grown?</a>
+    </div>
+  </div>
+
+  <div class="hero-rating">
+    <span class="stars-blue">★★★★★</span>
+    <div>
+      <div style="font-size:0.85rem; font-weight:500; color:var(--white);">5.0 Rating</div>
+      <div class="rating-label">163 Google Reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY LAB GROWN -->
+<section id="why" class="why-section">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div>
+        <div class="section-eyebrow">The Science</div>
+        <h2 class="section-title">Why Choose<br><em>Lab Grown?</em></h2>
+
+        <div class="why-points">
+          <div class="why-point">
+            <span class="why-num">01</span>
+            <div>
+              <div class="why-name">Chemically Identical</div>
+              <p class="why-text">Lab grown sapphires are corundum (Al₂O₃) — exactly the same chemical composition as mined sapphires. A gemologist cannot tell the difference without specialist equipment.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <span class="why-num">02</span>
+            <div>
+              <div class="why-name">Ethically Sourced</div>
+              <p class="why-text">Zero mining, zero displacement, zero environmental damage. Created in controlled laboratory conditions with a fraction of the ecological footprint.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <span class="why-num">03</span>
+            <div>
+              <div class="why-name">Exceptional Value</div>
+              <p class="why-text">Get a stunning, certified stone at a fraction of the cost of a mined equivalent — allowing you to choose a larger, finer gem for your budget.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <span class="why-num">04</span>
+            <div>
+              <div class="why-name">All Colours Available</div>
+              <p class="why-text">From deep royal blue to padparadscha pink-orange, vivid yellow, and pure white — any hue you desire, consistent and vibrant every time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="compare-card">
+          <div class="compare-header">
+            <div>Property</div>
+            <div class="highlight">Lab Grown ✦</div>
+            <div>Mined</div>
+          </div>
+          <div class="compare-row">
+            <div class="feature">Chemistry</div>
+            <div class="lab check">Al₂O₃ ✓</div>
+            <div>Al₂O₃ ✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="feature">Hardness (Mohs)</div>
+            <div class="lab check">9 ✓</div>
+            <div>9 ✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="feature">Brilliance</div>
+            <div class="lab check">Identical ✓</div>
+            <div>Identical ✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="feature">Certified</div>
+            <div class="lab check">Yes ✓</div>
+            <div>Yes ✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="feature">Eco Impact</div>
+            <div class="lab check">Minimal ✓</div>
+            <div class="cross">High ✗</div>
+          </div>
+          <div class="compare-row">
+            <div class="feature">Price</div>
+            <div class="lab check">Accessible ✓</div>
+            <div class="cross">Premium $$</div>
+          </div>
+          <div class="compare-row">
+            <div class="feature">Colour Choice</div>
+            <div class="lab check">Any ✓</div>
+            <div>Limited</div>
+          </div>
+          <div class="compare-row">
+            <div class="feature">Conflict Free</div>
+            <div class="lab check">Always ✓</div>
+            <div class="cross">Not guaranteed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section id="collection" class="products-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Our Stones</div>
+    <h2 class="section-title">The Collection</h2>
+    <p style="font-size:0.9rem; color:var(--muted); margin-top:0.5rem; max-width:500px;">Every stone set in custom jewellery, certified, and ready to ship or collect in Galle.</p>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <svg class="product-crystal" viewBox="0 0 80 80">
+          <defs>
+            <linearGradient id="p1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#4FA3F7"/>
+              <stop offset="100%" style="stop-color:#0D2545"/>
+            </linearGradient>
+          </defs>
+          <polygon points="40,5 70,25 70,55 40,75 10,55 10,25" fill="url(#p1)" opacity="0.9"/>
+          <polygon points="40,5 70,25 40,35" fill="rgba(79,163,247,0.9)"/>
+          <polygon points="40,5 10,25 40,35" fill="rgba(0,201,224,0.6)"/>
+        </svg>
+        <div class="product-name">Royal Blue Sapphire</div>
+        <div class="product-color">Classic Ceylon Blue</div>
+        <p class="product-desc">The iconic deep blue that made Ceylon famous — rich, velvety, and electric. Available in rounds, ovals, cushions, and emerald cuts.</p>
+      </div>
+
+      <div class="product-card">
+        <svg class="product-crystal" viewBox="0 0 80 80">
+          <defs>
+            <linearGradient id="p2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#F7A0C0"/>
+              <stop offset="100%" style="stop-color:#8B1A5A"/>
+            </linearGradient>
+          </defs>
+          <polygon points="40,5 70,25 70,55 40,75 10,55 10,25" fill="url(#p2)" opacity="0.9"/>
+          <polygon points="40,5 70,25 40,35" fill="rgba(247,160,192,0.9)"/>
+          <polygon points="40,5 10,25 40,35" fill="rgba(255,200,220,0.6)"/>
+        </svg>
+        <div class="product-name">Pink Sapphire</div>
+        <div class="product-color">Blush to Hot Pink</div>
+        <p class="product-desc">From delicate blush to vivid hot pink — romantic, feminine, and enduringly popular for engagement rings and pendants.</p>
+      </div>
+
+      <div class="product-card">
+        <svg class="product-crystal" viewBox="0 0 80 80">
+          <defs>
+            <linearGradient id="p3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#F7C84F"/>
+              <stop offset="100%" style="stop-color:#8B6A00"/>
+            </linearGradient>
+          </defs>
+          <polygon points="40,5 70,25 70,55 40,75 10,55 10,25" fill="url(#p3)" opacity="0.9"/>
+          <polygon points="40,5 70,25 40,35" fill="rgba(247,200,79,0.9)"/>
+          <polygon points="40,5 10,25 40,35" fill="rgba(255,230,140,0.6)"/>
+        </svg>
+        <div class="product-name">Yellow Sapphire</div>
+        <div class="product-color">Golden to Canary</div>
+        <p class="product-desc">Warm and luminous, from soft champagne to intense canary yellow. A stunning alternative to yellow diamond.</p>
+      </div>
+
+      <div class="product-card">
+        <svg class="product-crystal" viewBox="0 0 80 80">
+          <defs>
+            <linearGradient id="p4" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#F7A04F"/>
+              <stop offset="100%" style="stop-color:#C84F20"/>
+            </linearGradient>
+          </defs>
+          <polygon points="40,5 70,25 70,55 40,75 10,55 10,25" fill="url(#p4)" opacity="0.9"/>
+          <polygon points="40,5 70,25 40,35" fill="rgba(247,160,79,0.9)"/>
+          <polygon points="40,5 10,25 40,35" fill="rgba(255,190,120,0.6)"/>
+        </svg>
+        <div class="product-name">Padparadscha</div>
+        <div class="product-color">Lotus Pink-Orange</div>
+        <p class="product-desc">The rarest and most prized sapphire variety — a delicate blend of pink and orange inspired by the lotus flower. Extraordinary.</p>
+      </div>
+
+      <div class="product-card">
+        <svg class="product-crystal" viewBox="0 0 80 80">
+          <defs>
+            <linearGradient id="p5" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#EEEEFF"/>
+              <stop offset="100%" style="stop-color:#8888BB"/>
+            </linearGradient>
+          </defs>
+          <polygon points="40,5 70,25 70,55 40,75 10,55 10,25" fill="url(#p5)" opacity="0.9"/>
+          <polygon points="40,5 70,25 40,35" fill="rgba(240,240,255,0.9)"/>
+          <polygon points="40,5 10,25 40,35" fill="rgba(200,200,240,0.6)"/>
+        </svg>
+        <div class="product-name">White Sapphire</div>
+        <div class="product-color">Pure & Brilliant</div>
+        <p class="product-desc">Colourless and brilliant — an ethical, durable alternative to diamond for centre stones, halos, and pavé settings.</p>
+      </div>
+
+      <div class="product-card">
+        <svg class="product-crystal" viewBox="0 0 80 80">
+          <defs>
+            <linearGradient id="p6" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#80EE80"/>
+              <stop offset="100%" style="stop-color:#1A6B1A"/>
+            </linearGradient>
+          </defs>
+          <polygon points="40,5 70,25 70,55 40,75 10,55 10,25" fill="url(#p6)" opacity="0.9"/>
+          <polygon points="40,5 70,25 40,35" fill="rgba(128,238,128,0.9)"/>
+          <polygon points="40,5 10,25 40,35" fill="rgba(180,255,180,0.6)"/>
+        </svg>
+        <div class="product-name">Green Sapphire</div>
+        <div class="product-color">Forest to Teal</div>
+        <p class="product-desc">From earthy forest green to bright teal, green sapphires offer a distinctive, contemporary alternative to emerald.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="process-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="section-title">From Selection<br><em>to Your Hands</em></h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; margin-top:4rem;">
+      <div class="process-timeline">
+        <div class="timeline-step">
+          <div class="step-circle">01</div>
+          <div class="step-content">
+            <div class="step-title">Browse or Enquire</div>
+            <p class="step-text">Visit us in Galle, or reach out via WhatsApp to discuss which sapphire colour, size, and shape you're looking for. We'll guide you with expertise and zero pressure.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-circle">02</div>
+          <div class="step-content">
+            <div class="step-title">Select Your Stone</div>
+            <p class="step-text">Choose from our collection of certified lab grown sapphires. We show you options, explain each one clearly, and help you find the perfect match for your vision and budget.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-circle">03</div>
+          <div class="step-content">
+            <div class="step-title">Custom Jewellery (Optional)</div>
+            <p class="step-text">Want it set? We design and craft bespoke rings, pendants, and necklaces in gold or silver. Imtiyas keeps you updated with photos at every stage of crafting.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-circle">04</div>
+          <div class="step-content">
+            <div class="step-title">Certified & Delivered</div>
+            <p class="step-text">Your sapphire — whether loose or set — comes with full gemological certification. Delivered to your hotel anywhere in Galle, or collected from our showroom.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-top:1rem;">
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:6px; padding:2.5rem; margin-bottom:1.5rem;">
+          <div style="font-family:'Syne',sans-serif; font-weight:600; font-size:0.85rem; color:var(--blue-glow); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;">Quick WhatsApp Order</div>
+          <p style="font-size:0.82rem; line-height:1.75; color:var(--muted); margin-bottom:1.5rem;">Tell us what you need over WhatsApp and we'll send you options with prices — all from the comfort of wherever you are in Galle or the world.</p>
+          <a href="https://wa.me/94777903698?text=Hi%2C%20I'm%20interested%20in%20lab%20grown%20sapphires%20from%20Mashagems" target="_blank" class="btn-primary" style="display:inline-block; border-radius:3px;">Message Us Now</a>
+        </div>
+
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:6px; padding:2.5rem;">
+          <div style="font-family:'Syne',sans-serif; font-weight:600; font-size:0.85rem; color:var(--blue-glow); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;">Hotel Delivery</div>
+          <p style="font-size:0.82rem; line-height:1.75; color:var(--muted);">Staying in Galle? We deliver your gems and jewellery directly to your hotel — so you never have to worry about transportation or carrying valuables.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews-section">
+  <div class="section-inner">
+    <div class="reviews-header">
+      <div>
+        <div class="section-eyebrow">Client Reviews</div>
+        <h2 class="section-title">What Our Customers<br><em>Say</em></h2>
+      </div>
+      <div class="rating-display">
+        <div class="rating-num">5.0</div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-sub">163 Google Reviews</div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"We bought a beautiful sapphire here and are very happy with our experience. Unlike some other shops, never once felt taken advantage of. A very fair price–quality ratio and an extremely kind, calm man who clearly knows his craft."</p>
+        <div class="review-meta">Verified Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Top quality gems and very trustworthy. He went over and beyond for us, providing the jewellery set in gold in one day with certificates. The jewellery came out exactly like the pictures. Will definitely be buying more."</p>
+        <div class="review-meta">Verified Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Super patient, even changing the design if it wasn't working out. Everything delivered to our hotel, which was very convenient. We're very happy with the result and would definitely recommend them."</p>
+        <div class="review-meta">Verified Google Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Visit Us</div>
+    <h2 class="section-title">Come to Mashagems</h2>
+
+    <div class="contact-grid">
+      <div>
+        <div class="info-block">
+          <span class="info-label">Address</span>
+          <div class="info-value">64 Thakkiya Road<br>Galle 80000, Sri Lanka</div>
+        </div>
+        <div class="info-block">
+          <span class="info-label">Phone & WhatsApp</span>
+          <div class="info-value"><a href="tel:+94777903698">+94 77 790 3698</a></div>
+        </div>
+        <div class="info-block">
+          <span class="info-label">Website</span>
+          <div class="info-value"><a href="https://mashagems.com" target="_blank">mashagems.com</a></div>
+        </div>
+        <div class="info-block">
+          <span class="info-label">Opening Hours</span>
+          <div class="info-value">
+            <div class="hours-row"><span>Monday – Sunday</span><span>8:00 AM – 11:30 PM</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p style="font-size:0.9rem; line-height:1.8; color:var(--muted); margin-bottom:2rem;">We're open every day and love hearing from collectors and curious visitors alike. Whether you're in Galle or reaching out from across the world — drop us a message anytime.</p>
+        <div class="contact-buttons">
+          <a href="https://wa.me/94777903698" target="_blank" class="cta-btn primary">
+            <span class="cta-icon">💬</span> Chat on WhatsApp
+          </a>
+          <a href="tel:+94777903698" class="cta-btn secondary">
+            <span class="cta-icon">📞</span> Call +94 77 790 3698
+          </a>
+          <a href="https://maps.google.com/?q=64+Thakkiya+Rd+Galle+80000" target="_blank" class="cta-btn secondary">
+            <span class="cta-icon">🗺️</span> Get Directions
+          </a>
+          <a href="https://mashagems.com" target="_blank" class="cta-btn secondary">
+            <span class="cta-icon">🌐</span> Official Website
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ STORE ═══════════════════════════════════ -->
+<section id="store" style="background:var(--bg);padding:8rem 5rem;position:relative;z-index:1;">
+  <div class="section-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;">
+      <div>
+        <div class="section-eyebrow">Online Store</div>
+        <h2 class="section-title">Shop Lab Grown<br><em>Sapphires</em></h2>
+        <p style="font-size:0.85rem;color:var(--muted);margin-top:0.6rem;">Order via WhatsApp checkout · Certified & shipped or collected in Galle</p>
+      </div>
+      <!-- Filter bar -->
+      <div id="filter-bar" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button class="filter-btn active" data-filter="all" onclick="filterProducts('all',this)">All</button>
+        <button class="filter-btn" data-filter="blue" onclick="filterProducts('blue',this)">Blue</button>
+        <button class="filter-btn" data-filter="pink" onclick="filterProducts('pink',this)">Pink</button>
+        <button class="filter-btn" data-filter="yellow" onclick="filterProducts('yellow',this)">Yellow</button>
+        <button class="filter-btn" data-filter="padparadscha" onclick="filterProducts('padparadscha',this)">Padparadscha</button>
+        <button class="filter-btn" data-filter="white" onclick="filterProducts('white',this)">White</button>
+        <button class="filter-btn" data-filter="green" onclick="filterProducts('green',this)">Green</button>
+        <button class="filter-btn" data-filter="jewellery" onclick="filterProducts('jewellery',this)">Jewellery</button>
+      </div>
+    </div>
+
+    <!-- Sort + count bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">
+      <span id="product-count" style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">18 products</span>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <span style="font-size:0.7rem;color:var(--muted);">Sort by</span>
+        <select id="sort-select" onchange="sortProducts(this.value)" style="background:var(--card);color:var(--white);border:1px solid var(--border);padding:0.4rem 0.8rem;font-family:inherit;font-size:0.7rem;border-radius:2px;cursor:pointer;outline:none;">
+          <option value="default">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="carat-asc">Carat: Small to Large</option>
+          <option value="carat-desc">Carat: Large to Small</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product grid -->
+    <div id="product-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;"></div>
+
+    <!-- Empty state -->
+    <div id="empty-state" style="display:none;text-align:center;padding:5rem 0;color:var(--muted);">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">💎</div>
+      <p style="font-size:0.9rem;">No products in this filter. <button onclick="filterProducts('all',document.querySelector('.filter-btn'))" style="background:none;border:none;color:var(--blue-glow);cursor:pointer;font-size:0.9rem;text-decoration:underline;">View all</button></p>
+    </div>
+  </div>
+</section>
+
+<!-- CART DRAWER -->
+<div id="cart-overlay" onclick="toggleCart()" style="display:none;position:fixed;inset:0;background:rgba(3,8,15,0.7);z-index:200;backdrop-filter:blur(4px);"></div>
+<div id="cart-drawer" style="position:fixed;top:0;right:0;bottom:0;width:420px;max-width:100vw;background:var(--surface);border-left:1px solid var(--border-bright);z-index:201;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);">
+  <div style="padding:2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white);">Your Selection</div>
+      <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-top:0.2rem;" id="cart-subtitle">0 items</div>
+    </div>
+    <button onclick="toggleCart()" style="background:none;border:1px solid var(--border);color:var(--muted);width:36px;height:36px;border-radius:2px;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--border-bright)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">✕</button>
+  </div>
+
+  <div id="cart-items" style="flex:1;overflow-y:auto;padding:1.5rem 2rem;"></div>
+
+  <div id="cart-empty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);padding:2rem;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:1rem;">🛒</div>
+    <p style="font-size:0.85rem;margin-bottom:0.5rem;">Your cart is empty</p>
+    <p style="font-size:0.75rem;opacity:0.6;">Browse the store and add gems</p>
+  </div>
+
+  <div id="cart-footer" style="display:none;padding:2rem;border-top:1px solid var(--border);">
+    <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;">
+      <span style="font-size:0.75rem;color:var(--muted);">Subtotal</span>
+      <span id="cart-subtotal" style="font-size:0.85rem;font-weight:500;color:var(--white);">$0</span>
+    </div>
+    <p style="font-size:0.65rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;">Final pricing confirmed via WhatsApp. Includes gemological certificate. Shipping or hotel delivery available.</p>
+    <button onclick="whatsappCheckout()" style="width:100%;padding:1.1rem;background:linear-gradient(135deg,var(--blue-bright),var(--blue-glow));color:var(--white);border:none;border-radius:3px;font-family:'Syne',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 20px rgba(45,125,210,0.25);" onmouseover="this.style.boxShadow='0 4px 30px rgba(79,163,247,0.4)'" onmouseout="this.style.boxShadow='0 4px 20px rgba(45,125,210,0.25)'">
+      💬 Order via WhatsApp
+    </button>
+    <button onclick="clearCart()" style="width:100%;padding:0.7rem;background:none;color:var(--muted);border:none;font-family:inherit;font-size:0.65rem;letter-spacing:0.1em;cursor:pointer;margin-top:0.5rem;transition:color 0.2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Clear cart</button>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div id="modal-overlay" onclick="closeModal()" style="display:none;position:fixed;inset:0;background:rgba(3,8,15,0.85);z-index:300;backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:2rem;"></div>
+<div id="product-modal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:301;width:min(800px,95vw);max-height:90vh;overflow-y:auto;background:var(--surface);border:1px solid var(--border-bright);border-radius:6px;">
+  <div id="modal-content"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Masha<span>gems</span></div>
+    <div class="footer-tag">Lab Grown Sapphires · Galle, Sri Lanka · mashagems.com</div>
+  </div>
+  <div class="footer-links">
+    <a href="#why">Why Lab Grown</a>
+    <a href="#collection">Collection</a>
+    <a href="#store">Store</a>
+    <a href="#process">Process</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Mashagems · All Rights Reserved</div>
+</footer>
+
+<script>
+/* ─── NAV SCROLL ─── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+
+/* ─── SCROLL REVEAL ─── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.why-point, .product-card, .review-card, .timeline-step').forEach(el => {
+  el.style.cssText += 'opacity:0;transform:translateY(25px);transition:opacity 0.6s ease,transform 0.6s ease,border-color 0.3s,background 0.3s;';
+  obs.observe(el);
+});
+
+/* ─── PRODUCT DATA ─── */
+function gemSVG(stops, size=90) {
+  const [c1,c2,c3] = stops;
+  const id = 'g'+Math.random().toString(36).slice(2,6);
+  return `<svg width="${size}" height="${size}" viewBox="0 0 80 80">
+    <defs>
+      <linearGradient id="${id}a" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:${c1}"/><stop offset="100%" style="stop-color:${c2}"/></linearGradient>
+      <filter id="${id}f"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="url(#${id}a)" filter="url(#${id}f)" stroke="${c3}" stroke-width="0.5" opacity="0.92"/>
+    <polygon points="40,4 72,22 40,32" fill="${c1}" opacity="0.85"/>
+    <polygon points="40,4 8,22 40,32" fill="${c3}" opacity="0.5"/>
+    <polygon points="8,22 40,32 72,22" fill="${c1}" opacity="0.15"/>
+    <polygon points="40,32 72,22 72,58 40,60" fill="${c2}" opacity="0.55"/>
+    <polygon points="40,32 8,22 8,58 40,60" fill="${c2}" opacity="0.4"/>
+    <polygon points="40,60 72,58 40,76" fill="${c1}" opacity="0.45"/>
+    <polygon points="40,60 8,58 40,76" fill="${c2}" opacity="0.6"/>
+    <ellipse cx="30" cy="20" rx="8" ry="5" fill="rgba(255,255,255,0.18)" transform="rotate(-20,30,20)"/>
+  </svg>`;
+}
+
+const PRODUCTS = [
+  // BLUE SAPPHIRES
+  { id:1, name:'Royal Blue Sapphire', sub:'Round Brilliant', color:'blue', colorLabel:'Royal Blue', carat:1.2, shape:'Round', clarity:'VVS', price:185, badge:'popular',
+    stops:['#4FA3F7','#0D2545','rgba(79,163,247,0.4)'],
+    desc:'A vivid, deep royal blue Ceylon-colour sapphire. Expertly faceted to maximise brilliance. Ideal as a solitaire ring centre stone.' },
+  { id:2, name:'Cornflower Blue Sapphire', sub:'Oval Cut', color:'blue', colorLabel:'Cornflower Blue', carat:2.1, shape:'Oval', clarity:'VS', price:310, badge:'',
+    stops:['#7FC3FF','#1A4A8A','rgba(127,195,255,0.4)'],
+    desc:'A classic cornflower blue — lighter in tone with exceptional transparency. One of the most prized hues for Ceylon sapphires.' },
+  { id:3, name:'Deep Blue Sapphire', sub:'Cushion Cut', color:'blue', colorLabel:'Deep Ink Blue', carat:3.5, shape:'Cushion', clarity:'VS', price:520, badge:'rare',
+    stops:['#2D7DD2','#020C1B','rgba(45,125,210,0.5)'],
+    desc:'A deep, velvety blue with strong saturation. Set in an elegant cushion cut, this stone commands attention on any piece.' },
+  { id:4, name:'Ceylon Blue Sapphire', sub:'Emerald Cut', color:'blue', colorLabel:'Ceylon Blue', carat:1.8, shape:'Emerald', clarity:'VVS', price:265, badge:'new',
+    stops:['#60B4FF','#0D3570','rgba(96,180,255,0.35)'],
+    desc:'A bright, medium-toned Ceylon blue in a sophisticated emerald cut. Eye-clean with excellent transparency and lively step-cut brilliance.' },
+
+  // PINK
+  { id:5, name:'Hot Pink Sapphire', sub:'Round Brilliant', color:'pink', colorLabel:'Hot Pink', carat:0.9, shape:'Round', clarity:'VVS', price:155, badge:'popular',
+    stops:['#FF6EB0','#8B1A5A','rgba(255,110,176,0.4)'],
+    desc:'A vivid, saturated hot pink with exceptional brilliance. Perfect for statement rings or pendants. Fully certified.' },
+  { id:6, name:'Blush Pink Sapphire', sub:'Oval Cut', color:'pink', colorLabel:'Blush Rose', carat:1.4, shape:'Oval', clarity:'VS', price:195, badge:'',
+    stops:['#FFB8D4','#C46090','rgba(255,184,212,0.35)'],
+    desc:'A delicate blush rose — soft, feminine, and romantic. Ideal as a centre stone for engagement rings or paired in halos.' },
+  { id:7, name:'Magenta Sapphire', sub:'Cushion Cut', color:'pink', colorLabel:'Vivid Magenta', carat:2.0, shape:'Cushion', clarity:'VS', price:290, badge:'rare',
+    stops:['#FF45A0','#6B0040','rgba(255,69,160,0.4)'],
+    desc:'A rare vivid magenta-pink at the boundary of pink and purple — one of the most striking sapphire hues available.' },
+
+  // YELLOW
+  { id:8, name:'Canary Yellow Sapphire', sub:'Round Brilliant', color:'yellow', colorLabel:'Canary Yellow', carat:1.5, shape:'Round', clarity:'VVS', price:175, badge:'popular',
+    stops:['#FFE135','#8B6A00','rgba(255,225,53,0.4)'],
+    desc:'A vivid canary yellow with outstanding brightness and fire. A stunning diamond alternative in yellow tones.' },
+  { id:9, name:'Golden Yellow Sapphire', sub:'Oval Cut', color:'yellow', colorLabel:'Rich Gold', carat:2.3, shape:'Oval', clarity:'VS', price:295, badge:'',
+    stops:['#F7C84F','#7A4800','rgba(247,200,79,0.4)'],
+    desc:'A warm golden-yellow sapphire with rich saturation. Traditional and timeless — popularly set in yellow gold.' },
+  { id:10, name:'Champagne Sapphire', sub:'Cushion Cut', color:'yellow', colorLabel:'Champagne', carat:1.7, shape:'Cushion', clarity:'VS', price:210, badge:'new',
+    stops:['#F5D98B','#9E7A30','rgba(245,217,139,0.3)'],
+    desc:'A soft champagne-yellow sapphire with a subtle, sophisticated warmth. Pairs beautifully with rose gold settings.' },
+
+  // PADPARADSCHA
+  { id:11, name:'Padparadscha Sapphire', sub:'Oval Cut', color:'padparadscha', colorLabel:'Lotus Pink-Orange', carat:1.0, shape:'Oval', clarity:'VVS', price:480, badge:'rare',
+    stops:['#FFAA70','#C84F20','rgba(255,170,112,0.4)'],
+    desc:'The rarest sapphire variety — a delicate salmon-pink-orange inspired by the lotus blossom. Fully certified padparadscha colour range.' },
+  { id:12, name:'Padparadscha Sapphire', sub:'Round Brilliant', color:'padparadscha', colorLabel:'Salmon Pink', carat:0.8, shape:'Round', clarity:'VS', price:390, badge:'rare',
+    stops:['#FFB88A','#D46030','rgba(255,184,138,0.35)'],
+    desc:'A smaller round padparadscha with a warm salmon hue — the most prized of all sapphire colours in a classic cut.' },
+
+  // WHITE
+  { id:13, name:'White Sapphire', sub:'Round Brilliant', color:'white', colorLabel:'Pure White', carat:1.5, shape:'Round', clarity:'VVS', price:120, badge:'',
+    stops:['#EEEEFF','#9090CC','rgba(238,238,255,0.3)'],
+    desc:'A colourless, eye-clean white sapphire. An ethical and durable alternative to diamond with near-identical hardness (Mohs 9).' },
+  { id:14, name:'White Sapphire', sub:'Oval Cut', color:'white', colorLabel:'Icy White', carat:2.5, shape:'Oval', clarity:'IF', price:195, badge:'new',
+    stops:['#F4F4FF','#AAAAEE','rgba(244,244,255,0.25)'],
+    desc:'An internally flawless oval white sapphire — exceptional rarity and brilliance. Perfect as a solitaire or halo centre stone.' },
+
+  // GREEN
+  { id:15, name:'Forest Green Sapphire', sub:'Cushion Cut', color:'green', colorLabel:'Deep Forest', carat:1.8, shape:'Cushion', clarity:'VS', price:235, badge:'',
+    stops:['#50C050','#1A5A1A','rgba(80,192,80,0.4)'],
+    desc:'A deep forest green sapphire with earthy richness — a bold, contemporary alternative to emerald without the fragility.' },
+  { id:16, name:'Teal Sapphire', sub:'Oval Cut', color:'green', colorLabel:'Blue-Teal', carat:1.4, shape:'Oval', clarity:'VS', price:210, badge:'popular',
+    stops:['#30D0D0','#0A5050','rgba(48,208,208,0.4)'],
+    desc:'A striking blue-green teal sapphire that shifts between blue and green depending on lighting. Extremely fashionable in modern jewellery.' },
+
+  // JEWELLERY
+  { id:17, name:'Blue Sapphire Ring', sub:'18K Gold Setting', color:'jewellery', colorLabel:'Custom Jewellery', carat:1.2, shape:'Oval', clarity:'VS', price:620, badge:'popular',
+    stops:['#4FA3F7','#B8860B','rgba(79,163,247,0.4)'],
+    desc:'A 1.2ct oval blue sapphire set in 18K yellow gold with a simple claw setting — timeless and elegant. Custom sizing available. Includes gem certificate.' },
+  { id:18, name:'Pink Sapphire Pendant', sub:'Sterling Silver', color:'jewellery', colorLabel:'Custom Jewellery', carat:0.9, shape:'Round', clarity:'VVS', price:390, badge:'new',
+    stops:['#FF6EB0','#B0B0B0','rgba(255,110,176,0.35)'],
+    desc:'A vivid pink sapphire set in a sterling silver bezel pendant on a fine chain. Comes in a Mashagems gift box with certificate.' },
+];
+
+/* ─── CART STATE ─── */
+let cart = [];
+let activeFilter = 'all';
+let activeSort = 'default';
+
+function cartTotal() { return cart.reduce((s,i)=>s+i.price*i.qty, 0); }
+function cartCount() { return cart.reduce((s,i)=>s+i.qty, 0); }
+
+function updateCartUI() {
+  const count = cartCount();
+  const badge = document.getElementById('cart-count-badge');
+  badge.textContent = count;
+  badge.style.display = count > 0 ? 'inline' : 'none';
+
+  const items = document.getElementById('cart-items');
+  const empty = document.getElementById('cart-empty');
+  const footer = document.getElementById('cart-footer');
+  const subtitle = document.getElementById('cart-subtitle');
+
+  subtitle.textContent = count + (count===1?' item':' items');
+
+  if (cart.length === 0) {
+    items.style.display = 'none';
+    empty.style.display = 'flex';
+    footer.style.display = 'none';
+  } else {
+    items.style.display = 'block';
+    empty.style.display = 'none';
+    footer.style.display = 'block';
+    items.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-gem">${gemSVG(item.stops, 40)}</div>
+        <div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-spec">${item.carat}ct · ${item.shape} · ${item.clarity}</div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+            <button onclick="removeFromCart(${item.id})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.7rem;margin-left:0.5rem;transition:color 0.2s;" onmouseover="this.style.color='#E05555'" onmouseout="this.style.color='var(--muted)'">Remove</button>
+          </div>
+        </div>
+        <div class="cart-item-price">$${(item.price*item.qty).toLocaleString()}</div>
+      </div>
+    `).join('');
+    document.getElementById('cart-subtotal').textContent = '$'+cartTotal().toLocaleString();
+  }
+}
+
+function addToCart(id, btnEl) {
+  const p = PRODUCTS.find(x=>x.id===id);
+  const existing = cart.find(x=>x.id===id);
+  if (existing) { existing.qty++; }
+  else { cart.push({...p, qty:1}); }
+  updateCartUI();
+  if (btnEl) {
+    btnEl.textContent = '✓ Added';
+    btnEl.classList.add('added');
+    setTimeout(()=>{ btnEl.textContent='Add to Cart'; btnEl.classList.remove('added'); }, 1800);
+  }
+}
+
+function removeFromCart(id) { cart = cart.filter(x=>x.id!==id); updateCartUI(); }
+function changeQty(id, delta) {
+  const item = cart.find(x=>x.id===id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(id);
+  else updateCartUI();
+}
+function clearCart() { cart = []; updateCartUI(); }
+
+/* ─── CART DRAWER ─── */
+let cartOpen = false;
+function toggleCart() {
+  cartOpen = !cartOpen;
+  document.getElementById('cart-drawer').style.transform = cartOpen ? 'translateX(0)' : 'translateX(100%)';
+  document.getElementById('cart-overlay').style.display = cartOpen ? 'block' : 'none';
+  document.body.style.overflow = cartOpen ? 'hidden' : '';
+}
+
+/* ─── WHATSAPP CHECKOUT ─── */
+function whatsappCheckout() {
+  if (cart.length === 0) return;
+  const lines = cart.map(i=>`• ${i.qty}x ${i.name} (${i.carat}ct ${i.shape}, ${i.colorLabel}) — $${(i.price*i.qty).toLocaleString()}`);
+  const msg = `Hi! I'd like to order from Mashagems:\n\n${lines.join('\n')}\n\nEstimated total: $${cartTotal().toLocaleString()}\n\nCould you confirm availability and shipping options? Thank you!`;
+  window.open('https://wa.me/94777903698?text='+encodeURIComponent(msg), '_blank');
+}
+
+/* ─── PRODUCT MODAL ─── */
+function openModal(id) {
+  const p = PRODUCTS.find(x=>x.id===id);
+  const modal = document.getElementById('product-modal');
+  const overlay = document.getElementById('modal-overlay');
+  modal.innerHTML = `
+    <div style="position:relative;">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-gem-view" style="background:radial-gradient(ellipse at 50% 50%, rgba(79,163,247,0.1) 0%, var(--card) 70%);">
+        ${gemSVG(p.stops, 160)}
+      </div>
+      <div class="modal-body">
+        <div class="modal-color-label">${p.colorLabel}</div>
+        <div class="modal-name">${p.name}</div>
+        <div class="modal-price">$${p.price.toLocaleString()} <small>USD · Est. price</small></div>
+        <div class="modal-specs">
+          <div class="spec-chip"><span class="spec-label">Carat</span><span class="spec-val">${p.carat} ct</span></div>
+          <div class="spec-chip"><span class="spec-label">Shape</span><span class="spec-val">${p.shape}</span></div>
+          <div class="spec-chip"><span class="spec-label">Clarity</span><span class="spec-val">${p.clarity}</span></div>
+          <div class="spec-chip"><span class="spec-label">Type</span><span class="spec-val">Lab Grown</span></div>
+          <div class="spec-chip"><span class="spec-label">Certificate</span><span class="spec-val">Included ✓</span></div>
+          <div class="spec-chip"><span class="spec-label">Delivery</span><span class="spec-val">Hotel / Pickup</span></div>
+        </div>
+        <p class="modal-desc">${p.desc} All stones come with full gemological certification.</p>
+        <div class="modal-actions">
+          <button class="modal-add" onclick="addToCart(${p.id}); this.textContent='✓ Added to Cart'; setTimeout(()=>this.textContent='Add to Cart',1800);">Add to Cart</button>
+          <button class="modal-wa" onclick="window.open('https://wa.me/94777903698?text='+encodeURIComponent('Hi! I am interested in the ${p.name} (${p.carat}ct, ${p.shape}, $${p.price}). Is this available?'),'_blank')">💬 WhatsApp</button>
+        </div>
+      </div>
+    </div>`;
+  modal.style.display = 'block';
+  overlay.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('product-modal').style.display='none';
+  document.getElementById('modal-overlay').style.display='none';
+  document.body.style.overflow='';
+}
+
+/* ─── RENDER PRODUCTS ─── */
+function getFiltered() {
+  let list = activeFilter==='all' ? [...PRODUCTS] : PRODUCTS.filter(p=>p.color===activeFilter);
+  if (activeSort==='price-asc') list.sort((a,b)=>a.price-b.price);
+  else if (activeSort==='price-desc') list.sort((a,b)=>b.price-a.price);
+  else if (activeSort==='carat-asc') list.sort((a,b)=>a.carat-b.carat);
+  else if (activeSort==='carat-desc') list.sort((a,b)=>b.carat-a.carat);
+  return list;
+}
+
+function renderProducts() {
+  const list = getFiltered();
+  const grid = document.getElementById('product-grid');
+  const empty = document.getElementById('empty-state');
+  const count = document.getElementById('product-count');
+  count.textContent = list.length + ' product' + (list.length!==1?'s':'');
+
+  if (list.length === 0) { grid.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+
+  const badgeHTML = b => b ? `<span class="shop-badge badge-${b}">${b==='popular'?'Popular':b==='rare'?'Rare Find':'New'}</span>` : '';
+  const glowColor = s => s[0];
+
+  grid.innerHTML = list.map(p => `
+    <div class="shop-card" onclick="openModal(${p.id})">
+      <div class="shop-card-gem" style="background:radial-gradient(ellipse at 50% 40%, rgba(${hexToRgb(glowColor(p.stops))},0.12) 0%, var(--card) 70%);">
+        ${badgeHTML(p.badge)}
+        ${gemSVG(p.stops, 100)}
+      </div>
+      <div class="shop-card-body">
+        <div class="shop-card-color">${p.colorLabel}</div>
+        <div class="shop-card-name">${p.name}</div>
+        <div class="shop-card-specs">${p.carat}ct · ${p.shape} · ${p.clarity} · Lab Grown</div>
+        <div class="shop-card-footer">
+          <div class="shop-card-price">$${p.price.toLocaleString()} <span>USD</span></div>
+          <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${p.id}, this)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function hexToRgb(hex) {
+  if (!hex || !hex.startsWith('#')) return '79,163,247';
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return isNaN(r)?'79,163,247':`${r},${g},${b}`;
+}
+
+function filterProducts(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderProducts();
+}
+
+function sortProducts(val) { activeSort = val; renderProducts(); }
+
+/* ─── INIT ─── */
+renderProducts();
+updateCartUI();
+</script>
+</body>
+</html>
